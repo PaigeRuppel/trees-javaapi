@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Trees List</title>
+</head>
+<body>
+	<h1>List of Trees</h1>
+	
+	<ul>
+		<li th:each="currentTree: ${trees}"><a th:href="@{/tree(id=${currentTree.id})}" th:text="${currentTree.buildBinomialName()}" /></li>
+	</ul>
+</body>
+</html>

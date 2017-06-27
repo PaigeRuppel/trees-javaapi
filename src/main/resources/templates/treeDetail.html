@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="'Details for ' + ${tree.buildBinomialName()}" />
+</head>
+<body>
+	<h1 th:text="'Details for ' + ${tree.buildBinomialName()}" />
+	
+	<img th:src="'/images/' + ${tree.hasImageUrl()? tree.imageUrl: 'tree-default.png'}" th:alt="'image of ' + ${tree.buildBinomialName()}"/>
+</body>
+</html>
