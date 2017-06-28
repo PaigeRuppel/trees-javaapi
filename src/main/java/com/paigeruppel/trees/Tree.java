@@ -3,16 +3,21 @@ package com.paigeruppel.trees;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tree {
 
-	@GeneratedValue
 	@Id
+	@GeneratedValue
 	private Long id;
 
 	private String family;
-	private String genus;
+	
+	@ManyToOne
+	private Genus genus;
+	
+	
 	private String species;
 	private String commonName;
 
@@ -26,7 +31,7 @@ public class Tree {
 		return family;
 	}
 
-	public String getGenus() {
+	public Genus getGenus() {
 		return genus;
 	}
 
@@ -49,25 +54,25 @@ public class Tree {
 	private Tree() {
 	}
 
-	public Tree(String family, String genus, String species, String commonName) {
+	public Tree(String family, Genus genus, String species, String commonName) {
 		this.family = family;
 		this.genus = genus;
 		this.species = species;
 		this.commonName = commonName;
 	}
 	
-	public Tree(String family, String genus, String species, String commonName, String imageUrl) {
+	public Tree(String family, Genus genus, String species, String commonName, String imageUrl) {
 		this(family, genus,  species, commonName);
 		this.imageUrl = imageUrl;
 	}
 	
 	@Override
 	public String toString() {
-		return family + ": " + genus + " " + species + " ";
+		return family + ": " + genus.getName() + " " + species + " ";
 	}
 	
 	public String buildBinomialName() {
-		return genus + " " + species;
+		return genus.getName() + " " + species;
 	}
 	
 	

@@ -7,17 +7,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TreesPopulator implements CommandLineRunner {
-	
+
 	@Resource
-	private TreesRepository repo;
-	
+	private TreesRepository treeRepo;
+
+	@Resource
+	private GenusRepository genRepo;
+
 	@Override
 	public void run(String... args) throws Exception {
-		repo.save(new Tree("Fagaceae", "Fagus", "grandifolia", "American Beech"));
-		repo.save(new Tree("Fraxinaceae", "Fraxinus", "americana", "White Ash"));
-		repo.save(new Tree("Fagaceae", "Quercus", "prinus", "Pin Oak"));
-		repo.save(new Tree("Sapindaceae", "Acer", "saccharum", "Sugar Maple"));
-		repo.save(new Tree("Platanaceae", "Platanus", "occidentalis", "Sycamore", "platanus-occidentalis.jpg"));
+
+		Genus quercus = new Genus("Quercus",
+				"Quercus - English = Oak. Quercus belongs to the Beech family (Fagaceae). There are approximately 600 extant species of oaks.");
+		Genus fraxinus = new Genus("Fraxinus",
+				"Fraxinus - English = Ash. Genus of flowering plants in the olive and lilac family (Oleaceae).");
+		
+		genRepo.save(quercus);
+		genRepo.save(fraxinus);
+
+		treeRepo.save(new Tree("Fraxinaceae", fraxinus, "americana", "White Ash"));
+		treeRepo.save(new Tree("Fagaceae", quercus, "prinus", "Pin Oak"));
+		treeRepo.save(new Tree("Fagaceae", quercus, "rubra", "Northern Red Oak"));
+		treeRepo.save(new Tree("Fagaceae", quercus, "coccinea", "Scarlet Oak"));
+
 	}
 
 }
